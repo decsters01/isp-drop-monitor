@@ -1,4 +1,4 @@
-import { LiveNetworkStatus, OutageEvent, MetricsSummary } from "@shared/types";
+import { LiveNetworkStatus, OutageEvent, MetricsSummary, DailyMetricsSummary, QualityDistribution } from "@shared/types";
 
 export interface ElectronAPI {
   getNetworkStatus: () => Promise<LiveNetworkStatus>;
@@ -27,6 +27,10 @@ export interface ElectronAPI {
     availabilityPct?: number;
     outagesCount?: number;
     error?: string;
+  }>;
+  getAnalyticsData: (params?: { daysCount?: number }) => Promise<{
+    daily: DailyMetricsSummary[];
+    distribution: QualityDistribution;
   }>;
 }
 

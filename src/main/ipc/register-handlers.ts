@@ -43,4 +43,17 @@ export function registerIpcHandlers(): void {
   ipcMain.handle(IPC_CHANNELS.REPORT_GENERATE_PDF, async (_event, params) => {
     return ReportIpcHandler.handleGenerate(params);
   });
+
+  // Métricas analíticas para múltiplos gráficos
+  ipcMain.handle(IPC_CHANNELS.ANALYTICS_GET_DATA, (_event, params?: { daysCount?: number }) => {
+    const days = params?.daysCount || 7;
+    const daily = SampleRepository.getDailySummaries(days);
+    const now = Date.now();
+    const start = now - days * 86400000;
+    const distribution = SampleRepository.getQualityDistribution(start, now);
+    return {
+      daily,
+      distribution
+    };
+  });
 }

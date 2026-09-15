@@ -104,6 +104,21 @@ export interface MetricsSummary {
   averageLatencyMs: number;
 }
 
+export interface DailyMetricsSummary {
+  dateLabel: string;
+  uptimeHours: number;
+  downtimeMinutes: number;
+  outagesCount: number;
+  availabilityPct: number;
+}
+
+export interface QualityDistribution {
+  optimalPct: number;
+  normalPct: number;
+  unstablePct: number;
+  outagePct: number;
+}
+
 /**
  * Função utilitária para verificação exaustiva de switch statements com enums ou discriminated unions.
  */

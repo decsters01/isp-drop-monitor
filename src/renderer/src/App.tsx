@@ -2,30 +2,41 @@ import React, { useEffect, useState, useCallback } from "react";
 import { StatusHeader } from "./components/StatusHeader";
 import { MetricCards } from "./components/MetricCards";
 import { LatencyChart, LatencyDataPoint } from "./components/LatencyChart";
+import { DailyStabilityChart } from "./components/DailyStabilityChart";
+import { QualityDistribution } from "./components/QualityDistribution";
 import { OutagesTable } from "./components/OutagesTable";
 import { ReportModal } from "./components/ReportModal";
-import { LiveNetworkStatus, OutageEvent, MetricsSummary } from "@shared/types";
+import { LiveNetworkStatus, OutageEvent, MetricsSummary, DailyMetricsSummary, QualityDistribution as QualityDistType } from "@shared/types";
 
 export const App: React.FC = () => {
   const [networkStatus, setNetworkStatus] = useState<LiveNetworkStatus | null>(null);
   const [outages, setOutages] = useState<OutageEvent[]>([]);
   const [metrics, setMetrics] = useState<MetricsSummary | null>(null);
+  const [dailyMetrics, setDailyMetrics] = useState<DailyMetricsSummary[]>([]);
+  const [qualityDistribution, setQualityDistribution] = useState<QualityDistType | null>(null);
   const [latencyHistory, setLatencyHistory] = useState<LatencyDataPoint[]>([]);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
-  // Carregar dados iniciais e histórico
+  // Carregar dados analíticos e histórico
   const fetchHistory = useCallback(async () => {
     try {
       if (window.electronAPI) {
         const now = Date.now();
         const start = now - 7 * 24 * 60 * 60 * 1000; // últimos 7 dias
-        const result = await window.electronAPI.getOutagesHistory({
-          startDate: start,
-          endDate: now,
-          categoryFilter: "ALL"
-        });
-        setOutages(result.events);
-        setMetrics(result.metrics);
+
+        const [historyRes, analyticsRes] = await Promise.all([
+          window.electronAPI.getOutagesHistory({
+            startDate: start,
+            endDate: now,
+            categoryFilter: "ALL"
+          }),
+          window.electronAPI.getAnalyticsData({ daysCount: 7 })
+        ]);
+
+        setOutages(historyRes.events);
+        setMetrics(historyRes.metrics);
+        setDailyMetrics(analyticsRes.daily);
+        setQualityDistribution(analyticsRes.distribution);
       }
     } catch (err) {
       console.error("Erro ao carregar histórico:", err);
@@ -87,13 +98,19 @@ export const App: React.FC = () => {
         onOpenReportModal={() => setIsReportModalOpen(true)}
       />
 
-      {/* Cards de Métricas */}
+      {/* Cards de Métricas Principais */}
       <MetricCards status={networkStatus} metrics={metrics} />
 
-      {/* Gráfico de Latência em Tempo Real */}
+      {/* Seção de Múltiplos Gráficos Analíticos */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <DailyStabilityChart dailyData={dailyMetrics} />
+        <QualityDistribution distribution={qualityDistribution} />
+      </div>
+
+      {/* Gráfico de Linha em Tempo Real de Dupla Camada */}
       <LatencyChart data={latencyHistory} />
 
-      {/* Tabela Interativa de Quedas */}
+      {/* Tabela Interativa de Quedas com Filtros */}
       <OutagesTable events={outages} />
 
       {/* Modal de Emissão de Laudo Pericial */}

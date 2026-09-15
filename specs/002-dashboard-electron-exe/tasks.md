@@ -18,8 +18,8 @@ description: "Task list for Dashboard Dark Profissional e Empacotamento Executá
 
 **Purpose**: Configuração das ferramentas de empacotamento e criação dos ícones de alta resolução
 
-- [ ] T001 Configurar electron-builder com target NSIS e portable em package.json
-- [ ] T002 [P] Gerar e registrar asset de ícone oficial de alta resolução para o instalador em build/icon.ico e build/icon.png
+- [x] T001 Configurar electron-builder com target NSIS e portable em package.json
+- [x] T002 [P] Gerar e registrar asset de ícone oficial de alta resolução para o instalador em build/icon.ico e build/icon.png
 
 ---
 
@@ -27,9 +27,9 @@ description: "Task list for Dashboard Dark Profissional e Empacotamento Executá
 
 **Purpose**: Suporte a dados históricos agregados para múltiplos gráficos
 
-- [ ] T003 [P] Definir tipos DailyMetricsSummary e QualityDistribution em src/shared/types.ts
-- [ ] T004 [P] Implementar consultas de agregação dos últimos 7 dias e distribuição de faixas de latência em src/main/storage/repositories/sample-repository.ts
-- [ ] T005 Registrar novo canal IPC analítico em src/main/ipc/register-handlers.ts, src/shared/ipc-channels.ts e src/preload/index.ts
+- [x] T003 [P] Definir tipos DailyMetricsSummary e QualityDistribution em src/shared/types.ts
+- [x] T004 [P] Implementar consultas de agregação dos últimos 7 dias e distribuição de faixas de latência em src/main/storage/repositories/sample-repository.ts
+- [x] T005 Registrar novo canal IPC analítico em src/main/ipc/register-handlers.ts, src/shared/ipc-channels.ts e src/preload/index.ts
 
 **Checkpoint**: Camada de dados pronta para alimentar múltiplos gráficos.
 
@@ -41,9 +41,9 @@ description: "Task list for Dashboard Dark Profissional e Empacotamento Executá
 
 **Independent Test**: Abrir o dashboard: os três gráficos (tempo real de latência, distribuição de qualidade e barras dos últimos 7 dias) devem carregar simultaneamente de forma fluida a 60 FPS com efeitos de hover em cards e linhas.
 
-- [ ] T006 [P] [US1] Implementar componente de gráfico de barras de estabilidade dos últimos 7 dias em src/renderer/src/components/DailyStabilityChart.tsx
-- [ ] T007 [P] [US1] Implementar painel analítico de distribuição de qualidade de conexão em src/renderer/src/components/QualityDistribution.tsx
-- [ ] T008 [US1] Integrar a grade multi-gráficos responsiva e controles visuais no tema Dark em src/renderer/src/App.tsx
+- [x] T006 [P] [US1] Implementar componente de gráfico de barras de estabilidade dos últimos 7 dias em src/renderer/src/components/DailyStabilityChart.tsx
+- [x] T007 [P] [US1] Implementar painel analítico de distribuição de qualidade de conexão em src/renderer/src/components/QualityDistribution.tsx
+- [x] T008 [US1] Integrar a grade multi-gráficos responsiva e controles visuais no tema Dark em src/renderer/src/App.tsx
 
 **Checkpoint**: Dashboard Dark enriquecido com múltiplos gráficos analíticos funcional.
 
@@ -55,7 +55,7 @@ description: "Task list for Dashboard Dark Profissional e Empacotamento Executá
 
 **Independent Test**: Executar `npm run build:exe` e verificar a criação bem-sucedida do instalador `.exe` funcional na pasta `release/`.
 
-- [ ] T009 [US2] Executar o pipeline de empacotamento e compilar o instalador executável oficial (.exe) na pasta release/
+- [x] T009 [US2] Executar o pipeline de empacotamento e compilar o instalador executável oficial (.exe) na pasta release/
 
 ---
 
@@ -63,4 +63,4 @@ description: "Task list for Dashboard Dark Profissional e Empacotamento Executá
 
 **Purpose**: Verificação de conformidade, validação de regras de código e testes
 
-- [ ] T010 [P] Executar testes unitários e auditoria de ausência de imports inline e exaustividade TypeScript em todo o código
+- [x] T010 [P] Executar testes unitários e auditoria de ausência de imports inline e exaustividade TypeScript em todo o código

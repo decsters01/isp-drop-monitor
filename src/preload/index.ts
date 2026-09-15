@@ -19,5 +19,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
     contractNumber?: string;
     incidentProtocol?: string;
     destinationPath?: string;
-  }) => ipcRenderer.invoke(IPC_CHANNELS.REPORT_GENERATE_PDF, params)
+  }) => ipcRenderer.invoke(IPC_CHANNELS.REPORT_GENERATE_PDF, params),
+  getAnalyticsData: (params?: { daysCount?: number }) =>
+    ipcRenderer.invoke(IPC_CHANNELS.ANALYTICS_GET_DATA, params)
 });
