@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Electron IPC Communication Contracts",
+  "description": "Definição formal dos canais de comunicação tipada entre Main Process e Renderer Process",
+  "channels": {
+    "network:get-current-status": {
+      "type": "invoke",
+      "request": null,
+      "response": {
+        "status": "ONLINE | ISP_OUTAGE | LOCAL_OUTAGE | FLAPPING",
+        "currentGatewayLatencyMs": "number | null",
+        "currentExternalLatencyMs": "number | null",
+        "interfaceType": "ETHERNET | WIFI | OTHER",
+        "interfaceName": "string",
+        "gatewayIp": "string",
+        "isMonitoring": "boolean"
+      }
+    },
+    "network:status-updated": {
+      "type": "push-event",
+      "payload": {
+        "timestamp": "number",
+        "status": "ONLINE | ISP_OUTAGE | LOCAL_OUTAGE | FLAPPING",
+        "gatewayLatencyMs": "number | null",
+        "externalLatencyMs": "number | null",
+        "gatewayLossPct": "number",
+        "externalLossPct": "number"
+      }
+    },
+    "outages:get-history": {
+      "type": "invoke",
+      "request": {
+        "startDate": "number",
+        "endDate": "number",
+        "categoryFilter": "ALL | ISP_ONLY | LOCAL_ONLY"
+      },
+      "response": {
+        "events": [
+          {
+            "id": "string",
+            "startTime": "number",
+            "endTime": "number | null",
+            "durationSeconds": "number",
+            "category": "ISP_EXTERNAL_FAILURE | LOCAL_ROUTER_FAILURE",
+            "eventType": "CONTINUOUS_OUTAGE | FLAPPING_WINDOW",
+            "packetLossAvg": "number"
+          }
+        ],
+        "metrics": {
+          "totalMonitoredHours": "number",
+          "totalOutagesCount": "number",
+          "totalDowntimeSeconds": "number",
+          "availabilityPct": "number"
+        }
+      }
+    },
+    "report:generate-pdf": {
+      "type": "invoke",
+      "request": {
+        "periodStart": "number",
+        "periodEnd": "number",
+        "customerName": "string",
+        "ispName": "string",
+        "contractNumber": "string",
+        "incidentProtocol": "string",
+        "destinationPath": "string | null"
+      },
+      "response": {
+        "success": "boolean",
+        "reportId": "string",
+        "pdfPath": "string",
+        "sha256Hash": "string",
+        "availabilityPct": "number",
+        "outagesCount": "number",
+        "error": "string | null"
+      }
+    }
+  }
+}
