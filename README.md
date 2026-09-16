@@ -1,120 +1,165 @@
-# 🛡️ Monitor de Conexão ISP & Auditoria de Quedas de Rede
+<div align="center">
 
-> **Software desktop para Windows que monitora silenciosamente sua internet, diferencia quedas da operadora de oscilações do Wi-Fi local e gera laudos técnicos periciais em PDF com Hash SHA-256 para anexar em reclamações na Anatel, Procon e Ouvidorias.**
+# 🛡️ Monitor de Conexão ISP & Auditoria de Quedas
 
-[![Plataforma](https://img.shields.io/badge/Plataforma-Windows%2010%20%7C%2011%20(x64)-blue.svg?style=flat-square)](https://github.com/decsters01/isp-drop-monitor)
-[![Tecnologia](https://img.shields.io/badge/Stack-Electron%20%7C%20TypeScript%20%7C%20React%20%7C%20Tailwind%20%7C%20SQLite-0B0F19.svg?style=flat-square)](https://github.com/decsters01/isp-drop-monitor)
-[![Licença](https://img.shields.io/badge/Licença-MIT-green.svg?style=flat-square)](LICENSE)
+<p align="center">
+  <img src="assets/capa.png" alt="Capa do Monitor de Conexão ISP" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+</p>
+
+**Software desktop profissional para Windows que monitora silenciosamente sua internet, diferencia quedas do link da operadora de oscilações do Wi-Fi local e gera laudos técnicos periciais em PDF com Hash SHA-256 para comprovação irrefutável na Anatel, Procon e Ouvidorias.**
+
+<p align="center">
+  <a href="https://github.com/decsters01/isp-drop-monitor/releases/download/v1.0.0/Monitor.de.Conexao.ISP.Setup.1.0.0.exe">
+    <img src="https://img.shields.io/badge/⬇️_Baixar_Instalador_Windows_(.exe)-2563EB?style=for-the-badge&logo=windows&logoColor=white" alt="Baixar Instalador Windows (.exe)" />
+  </a>
+  <a href="https://github.com/decsters01/isp-drop-monitor/releases/download/v1.0.0/Monitor.de.Conexao.ISP.1.0.0.exe">
+    <img src="https://img.shields.io/badge/📦_Versão_Portátil_(.exe)-0F172A?style=for-the-badge&logo=windows&logoColor=38BDF8" alt="Baixar Versão Portátil (.exe)" />
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Versão-v1.0.0-blue.svg?style=flat-square" alt="Versão v1.0.0" />
+  <img src="https://img.shields.io/badge/Plataforma-Windows%2010%20%7C%2011%20(x64)-0B0F19.svg?style=flat-square&logo=windows" alt="Plataforma Windows" />
+  <img src="https://img.shields.io/badge/Licença-MIT-green.svg?style=flat-square" alt="Licença MIT" />
+  <img src="https://img.shields.io/badge/Anatel-Res.%20574%20%26%20632-orange.svg?style=flat-square" alt="Conformidade Anatel" />
+</p>
+
+</div>
 
 ---
 
-## 🛑 Qual dor este projeto resolve?
+## 📥 Downloads Diretos (Windows 10 / 11)
 
-Quem trabalha em home office, estuda a distância ou joga online conhece esta rotina frustrante:
+| Tipo | Arquivo | Tamanho | Instruções | Link Direto |
+| :--- | :--- | :---: | :--- | :---: |
+| **Instalador Oficial** | `Monitor de Conexao ISP Setup 1.0.0.exe` | ~91 MB | Instalação rápida em 1 clique, cria atalhos na Área de Trabalho e Menu Iniciar. | [⬇️ **Download Instalador (.exe)**](https://github.com/decsters01/isp-drop-monitor/releases/download/v1.0.0/Monitor.de.Conexao.ISP.Setup.1.0.0.exe) |
+| **Versão Portátil** | `Monitor de Conexao ISP 1.0.0.exe` | ~91 MB | Não requer instalação. Dê dois cliques para rodar direto de qualquer pasta ou pendrive. | [📦 **Download Portátil (.exe)**](https://github.com/decsters01/isp-drop-monitor/releases/download/v1.0.0/Monitor.de.Conexao.ISP.1.0.0.exe) |
 
-1. **A internet cai várias vezes ao dia**, interrompendo chamadas no Teams/Google Meet, conexões VPN e transações.
-2. Você abre um chamado no suporte do provedor (ISP).
-3. O atendente te liga minutos depois, pede para você reiniciar o modem e executa um teste rápido de velocidade de 30 segundos.
-4. Por azar ou coincidência, naquele minuto a conexão respondeu normalmente, e a resposta padrão do suporte é:
-   > *"Aqui na nossa central o sinal está normal. O problema deve ser interferência no seu roteador Wi-Fi ou no seu aparelho."*
-5. Você continua pagando a mensalidade cheia por um serviço instável e fica de mãos atadas por **falta de provas técnicas estruturadas**.
-
-O **Monitor de Conexão ISP** foi criado especificamente para **acabar com a assimetria técnica entre o consumidor e a operadora**.
+> 💡 **Nota de Segurança**: O software não requer permissões de Administrador para ser instalado ou executado. Todo o monitoramento roda sob credenciais normais de usuário do Windows.
 
 ---
 
-## ⚡ Como o software comprova a falha da operadora?
+## 🛑 Por que este software foi criado? (A dor que ele resolve)
 
-### 1. Sondagem em Dupla Camada (Dual-Layer Probing)
-Para derrotar o argumento de *"a culpa é do seu Wi-Fi"*, o software monitora continuamente dois destinos em paralelo:
-- **Camada Local:** O Gateway Padrão (roteador da sua casa, ex: `192.168.1.1`).
-- **Camada Externa (Internet):** Destinos públicos de alta disponibilidade (`1.1.1.1` da Cloudflare e `8.8.8.8` do Google).
+Quem trabalha em home office, faz reuniões pelo Teams/Google Meet, estuda ou joga online já passou por essa situação:
 
-> **A Prova Técnica Irrefutável:**  
-> Se o ping para o seu roteador local responder em menos de **2 milissegundos com 0% de perda de pacotes**, mas as consultas externas para a internet falharem simultaneamente, **está matematicamente comprovado que a sua rede Wi-Fi está 100% íntegra** e que a interrupção ocorreu no link de fibra/cabo fornecido pela operadora.
+1. **A sua internet cai várias vezes durante o dia**, travando chamadas, perdendo dados e interrompendo seu trabalho.
+2. Você liga no suporte técnico do provedor de internet (Claro, Vivo, Oi, provedores locais, etc.).
+3. O atendente pede para você desligar o roteador por 10 segundos, liga novamente e executa um teste rápido de velocidade de 30 segundos.
+4. Por coincidência, naquele momento a conexão voltou a responder, e o atendente encerra o protocolo dizendo:
+   > *"Senhor(a), aqui no nosso sistema o sinal da sua fibra está excelente e sem falhas. O problema deve ser interferência no seu Wi-Fi ou no seu computador."*
+5. Você continua sofrendo com microquedas diárias, acumulando prejuízos, e fica sem amparo porque **não tem como provar tecnicamente que o problema está na rede da operadora**.
 
-### 2. Auditoria Real do Ciclo de Vida do PC (Uptime do Windows)
-Provedores frequentemente alegam: *"o cliente não navegou porque o computador estava desligado"*.
-- O software grava um batimento contínuo (*heartbeat*) a cada 30 segundos em banco SQLite local.
-- Identifica com precisão o momento do boot, desligamento e suspensão (Sleep/Resume) do Windows.
-- O cálculo da taxa de disponibilidade (% de uptime da internet) é feito **estritamente em cima das horas em que o computador do usuário esteve ligado**, eliminando qualquer margem de contestação.
+O **Monitor de Conexão ISP** foi criado para colocar nas mãos do consumidor uma **ferramenta de auditoria técnica incontestável**.
+
+---
+
+## 🔬 Como o software prova que a culpa é da operadora?
+
+### 1. Auditoria de Dupla Camada Simultânea (Dual-Layer)
+Para neutralizar a desculpa clássica de que *"o defeito é o seu roteador Wi-Fi"*, o motor dispara sondagens simultâneas a cada 3 segundos em duas frentes:
+- **Camada Local:** Comunica-se com o Gateway Padrão (o IP do roteador dentro da sua residência, ex.: `192.168.1.1`).
+- **Camada Externa (Internet):** Comunica-se com servidores mundiais de altíssima disponibilidade (`1.1.1.1` da Cloudflare e `8.8.8.8` do Google).
+
+```text
+       [Seu Computador]
+             │
+     ┌───────┴───────┐
+     ▼               ▼
+[Roteador Local]   [Internet Externa]
+ (192.168.1.1)    (1.1.1.1 / 8.8.8.8)
+     │                   │
+    0ms                 FALHA (Timeout)
+     │                   │
+     └─────────┬─────────┘
+               ▼
+   [DIAGNÓSTICO INCONTESTÁVEL]
+   Wi-Fi local: 100% ÍNTEGRO
+   Falha: EXCLUSIVA DA OPERADORA (ISP)
+```
+
+> **A Prova Técnica:**  
+> Se o roteador da sua casa responder com **0% de perda de pacotes e latência de 1ms**, mas a internet externa parar de responder simultaneamente por mais de 5 segundos, **fica matematicamente demonstrado que o seu Wi-Fi está perfeito e que o link externo da operadora foi interrompido.**
+
+### 2. Auditoria Real de Uptime do PC (Horas Ligado vs. Desligado)
+O provedor não pode alegar que você ficou sem sinal porque seu computador estava desligado.
+- O software mantém um batimento periódico (*heartbeat*) gravado no banco de dados local SQLite a cada 30 segundos.
+- Mapeia com exatidão os períodos de inicialização (boot), encerramento e suspensão de energia (Sleep/Resume) do Windows.
+- O cálculo de disponibilidade da internet é feito **estritamente em relação ao tempo em que o computador esteve operacional**, entregando um percentual exato e auditável.
 
 ### 3. Resiliência com Fallback TCP Inteligente
-Muitos roteadores residenciais vêm de fábrica com regras que descartam pacotes de ping (ICMP Echo). Nesses casos, o motor executa automaticamente um **handshake TCP nas portas 53 (DNS), 80 (HTTP) ou 443 (HTTPS)** do roteador, comprovando a integridade da comunicação local sem falsos alertas.
+Muitos roteadores de operadoras vêm configurados para bloquear ping (ICMP Echo). O software detecta esse bloqueio automaticamente e aciona um **handshake TCP nas portas 53 (DNS), 80 (HTTP) ou 443 (HTTPS)** do roteador, comprovando a integridade da comunicação local sem falsos alertas.
 
-### 4. Laudo Pericial Oficial em PDF com Hash SHA-256
-Com apenas um clique, o aplicativo gera um documento formal em PDF contendo:
-- Dados cadastrais do assinante, operadora, número de contrato e protocolo contestado.
-- Resumo executivo de horas de PC ligado vs. minutos de internet fora do ar.
-- Comparativo com a meta regulatória oficial (**Resoluções 574 e 632 da Anatel**).
-- Tabela cronológica com a data e o segundo exato de cada queda e a segregação de culpa.
-- **Hash Criptográfico SHA-256** e ID Único de Emissão no rodapé, assegurando que o relatório não foi adulterado.
+### 4. Emissão de Laudo Técnico Pericial em PDF com Hash SHA-256
+Com um único clique no botão **"Gerar Laudo Técnico em PDF"**, o software compila um documento oficial contendo:
+- Nome do titular, operadora, número do contrato e protocolo de atendimento contestado.
+- Resumo executivo de horas monitoradas vs. tempo acumulado de indisponibilidade da operadora.
+- Comparativo com a meta regulatória da Anatel (**mínimo de 99.00% de disponibilidade**).
+- Tabela cronológica de todas as interrupções com data, horário de início, horário de término e duração em segundos.
+- **Hash Criptográfico SHA-256** e Identificador Único de Emissão no rodapé para garantir que o laudo não sofreu edições após a emissão.
 
 ---
 
-## ✨ Recursos da Aplicação
+## 📊 Recursos do Dashboard (Paleta Dark Preto e Azul)
 
-- **Dashboard Dark Profissional:** Interface moderna nas cores preto e azul escuro (`#070B14` e `#0B0F19`), com cards de métricas, efeitos interativos de hover e renderização a 60 FPS.
-- **Múltiplos Gráficos Analíticos:**
-  - *Tempo Real:* Gráfico comparando a latência do gateway local contra a internet externa.
-  - *Estabilidade Diária:* Barras dos últimos 7 dias mostrando horas de uso do PC vs. minutos de queda do ISP.
-  - *Distribuição de Qualidade:* Percentual de amostras entre conexões Ótimas, Normais, Instáveis e Quedas.
-- **Tabela Interativa:** Busca instantânea por data/hora, paginação e filtros rápidos (*Apenas ISP*, *Apenas Local*, *Todos*).
+- **Layout Escuro de Alto Contraste:** Interface moderna projetada em `#070B14` e `#0B0F19` com cartões em `#0F172A` e acentos em `#3B82F6` (azul).
+- **Cards de Métricas em Tempo Real:** Status atual da rede, disponibilidade efetiva acumulada (%), contagem de quedas e tempo operacional do PC.
+- **Múltiplos Gráficos Analíticos Integrados:**
+  - *Latência em Tempo Real:* Gráfico SVG a 60 FPS comparando a latência local do roteador contra a internet.
+  - *Estabilidade Diária:* Gráfico de barras dos últimos 7 dias comparando horas de uso contra minutos de indisponibilidade.
+  - *Distribuição de Qualidade:* Painel categorizando a conexão entre Ótima, Normal, Instável e Queda Total.
+- **Tabela com Busca e Filtros:** Pesquisa por data/hora e filtros rápidos (*Todos*, *Apenas ISP*, *Apenas Local*).
 - **Operação Silenciosa na Bandeja (System Tray):**
-  - Ao fechar a janela no "X", o programa continua rodando minimizado junto ao relógio do Windows.
-  - Notificações nativas na tela avisam quando uma queda de internet é confirmada.
-- **Privacidade Total e Baixo Consumo:**
-  - Banco de dados SQLite local em modo WAL.
-  - 100% offline: nenhum dado pessoal ou de tráfego é enviado para servidores externos.
-  - Consumo de CPU inferior a 1% e tráfego de sondagem de rede desprezível (< 2 KB/min).
-  - Execução sob permissões normais de usuário (sem necessidade de privilégios de Administrador / UAC).
+  - Ao clicar no "X", a janela fecha mas o monitor continua rodando discretamente ao lado do relógio do Windows.
+  - Notificações nativas do Windows avisam no exato segundo em que uma queda da operadora for confirmada.
+  - Para reabrir, basta dar duplo clique no ícone da bandeja.
 
 ---
 
-## 🚀 Como Usar
+## 🛠️ Como Instalar e Utilizar (Passo a Passo)
 
-### Opção 1: Baixar o Executável para Windows (.exe)
-Você pode baixar os binários prontos gerados na pasta `release/` ou na aba de [Releases](https://github.com/decsters01/isp-drop-monitor/releases):
-- **`Monitor de Conexao ISP Setup 1.0.0.exe`**: Instalador oficial para Windows 10/11 x64 (instalação em 1 clique com atalhos).
-- **`Monitor de Conexao ISP 1.0.0.exe`**: Versão portátil (*portable*), pronta para rodar sem necessidade de instalação.
+### Modo Simples (Para Usuários Finais):
+1. Acesse o link de download direto:  
+   👉 [**Baixar Monitor de Conexao ISP Setup 1.0.0.exe**](https://github.com/decsters01/isp-drop-monitor/releases/download/v1.0.0/Monitor.de.Conexao.ISP.Setup.1.0.0.exe)
+2. Execute o instalador baixado (a instalação ocorre em segundos sem pedir senha de administrador).
+3. O programa abrirá automaticamente e começará a auditar sua rede.
+4. Você pode deixar ele aberto ou simplesmente fechar a janela no "X" — ele continuará monitorando na bandeja do relógio.
+5. Quando precisar comprovar as quedas para o provedor ou abrir reclamação no Procon/Anatel, abra o aplicativo, clique em **"Gerar Laudo Técnico em PDF"**, preencha os dados da sua conta e clique em **"Exportar Laudo em PDF"**.
 
 ---
 
-### Opção 2: Rodar o Código em Desenvolvimento
-
-#### Pré-Requisitos
-- [Node.js](https://nodejs.org/) v20+ LTS instalado no computador.
-- Windows 10 ou Windows 11.
-
-#### Passo a Passo
+### Modo Desenvolvedor (Executar ou Compilar o Código-Fonte):
 ```bash
-# 1. Clone este repositório
+# 1. Clonar o repositório
 git clone https://github.com/decsters01/isp-drop-monitor.git
 cd isp-drop-monitor
 
-# 2. Instale as dependências
+# 2. Instalar as dependências do projeto
 npm install
 
-# 3. Inicie em modo de desenvolvimento com hot-reload
+# 3. Iniciar a aplicação em modo de desenvolvimento
 npm run dev
 
-# 4. Para rodar a suíte de testes unitários automatizados
+# 4. Executar os testes unitários automatizados (Vitest)
 npm test
 
-# 5. Para compilar o instalador executável (.exe) na pasta release/
+# 5. Compilar novos arquivos executáveis (.exe) na pasta release/
 npm run build:exe
 ```
 
 ---
 
-## 🏛️ Base Legal e Regulatória (Anatel)
+## ⚖️ Base Legal e Regulatória no Brasil (Anatel e CDC)
 
-O laudo gerado por esta ferramenta é fundamentado nas normas vigentes do setor de telecomunicações no Brasil:
-- **Resolução nº 574/2011 da Anatel (R-QST):** Define os parâmetros de qualidade para redes de banda larga fixa, incluindo metas de disponibilidade e latência.
-- **Resolução nº 632/2014 da Anatel (RGC):** Garante ao consumidor o **desconto proporcional na fatura** por períodos de interrupção de serviço, além de amparo para **rescisão contratual sem cobrança de multa de fidelidade** em caso de descumprimento contínuo da oferta contratada.
+O laudo emitido por esta aplicação fornece subsídios fundamentados na legislação brasileira de telecomunicações:
+- **Resolução nº 574/2011 da Anatel (R-QST):** Estabelece que os provedores de banda larga fixa devem garantir índices de qualidade, velocidade instantânea e disponibilidade contínua da rede.
+- **Resolução nº 632/2014 da Anatel (Regulamento Geral de Direitos do Consumidor - RGC):**
+  - **Art. 46:** Determina o **abatimento proporcional na fatura** mensal por qualquer interrupção do serviço superior a 30 minutos.
+  - **Art. 58:** Assegura ao consumidor o direito de **rescindir o contrato sem pagamento de multa de fidelidade** caso a prestadora descumpra reiteradamente as condições de qualidade contratadas.
+- **Código de Defesa do Consumidor (Lei nº 8.078/1990 - Art. 6º, VI e Art. 20):** Garante a efetiva reparação por serviços impróprios ou descontínuos.
 
 ---
 
-## 📜 Licença
+## 📄 Licença
 
-Este projeto é disponibilizado sob a licença [MIT](LICENSE). Desenvolvido para proteger os direitos de consumidores e profissionais que dependem de estabilidade em sua conexão de internet.
+Este projeto é software livre licenciado sob a [Licença MIT](LICENSE). Criado para democratizar o acesso a diagnósticos técnicos de rede e proteger os direitos dos consumidores.
