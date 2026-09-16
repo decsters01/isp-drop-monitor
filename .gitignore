@@ -7,7 +7,6 @@ node_modules/
 dist/
 dist-electron/
 release/
-build/
 out/
 
 # Environment and secrets
@@ -30,7 +29,9 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-# IDE and editors
-.vscode/*
-!.vscode/extensions.json
+# IDE and Spec Kit internal artifacts
+.vscode/
 .idea/
+.cursor/
+.specify/
+specs/
